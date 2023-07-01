@@ -1,25 +1,45 @@
-import logo from './logo.svg';
-import './App.css';
+import './App.css'
+import GPTClient from 'gpt-tools'
+import React, { useEffect } from 'react'
+
+const client = new GPTClient()
+const samplePrompt = 'Tell me a joke'
 
 function App() {
+  useEffect(() => {
+    client.defaultTemperature = 0.5
+
+    doSampleCalls()
+  }, [])
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className='App'>
+      <div className='exampleSection'>
+        <input id='singleCallInput' type='text' placeholder={samplePrompt} />
+        <p id='singleCallResponse' className='responseText'></p>
+      </div>
     </div>
-  );
+  )
 }
 
-export default App;
+function doSampleCalls() {
+  doSingleCall()
+
+  // Create an agent
+
+  // Continue conversation with agent (3x)
+
+  // Build a dataset?
+
+  // Return an npm script call?
+}
+function doSingleCall() {
+  client
+    .singlePrompt(samplePrompt)
+    .then(response => {
+      document.getElementById('singleCallResponse').innerHTML = response
+      console.log(response)
+    })
+}
+
+export default App
