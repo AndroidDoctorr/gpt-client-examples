@@ -1,4 +1,4 @@
-import './App.css'
+import './styles/index.sass'
 import GPTClient from 'gpt-tools'
 import React, { useEffect } from 'react'
 
@@ -14,9 +14,13 @@ function App() {
 
   return (
     <div className='App'>
-      <div className='exampleSection'>
+      <div className='chatSection'>
+        <h3>Single Call</h3>
         <input id='singleCallInput' type='text' placeholder={samplePrompt} />
-        <p id='singleCallResponse' className='responseText'></p>
+        <input type='submit' value={'GO'} />
+        <hr></hr>
+        <h4>Response:</h4>
+        <p className='response' id='singleCallResponse'></p>
       </div>
     </div>
   )
@@ -34,12 +38,10 @@ function doSampleCalls() {
   // Return an npm script call?
 }
 function doSingleCall() {
-  client
-    .singlePrompt(samplePrompt)
-    .then(response => {
-      document.getElementById('singleCallResponse').innerHTML = response
-      console.log(response)
-    })
+  client.singlePrompt(samplePrompt).then((response) => {
+    document.getElementById('singleCallResponse').innerHTML = response
+    console.log(response)
+  })
 }
 
 export default App
