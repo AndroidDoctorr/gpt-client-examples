@@ -4,7 +4,7 @@ import { FaSpinner } from 'react-icons/fa'
 
 const startMessages = [new ChatMessage('Knock knock!', Role.assistant)]
 
-const Conversation = ({ title, gptClient }) => {
+const Conversation = ({ title, gptClient, placeholder }) => {
   const [prompt, setPrompt] = useState('')
   const [messages, setMessages] = useState(startMessages)
   const [isLoading, setIsLoading] = useState(false)
@@ -32,7 +32,7 @@ const Conversation = ({ title, gptClient }) => {
       <span>
         <input
           type='text'
-          placeholder={"Who's there?"}
+          placeholder={placeholder}
           onKeyDown={(e) => handleKeyPress(e)}
           onChange={(e) => setPrompt(e.target.value)}
         />
