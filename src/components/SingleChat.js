@@ -3,7 +3,7 @@ import { FaSpinner } from 'react-icons/fa'
 
 const samplePrompt = 'Tell me a joke'
 
-const SingleChat = ({ gptClient }) => {
+const SingleChat = ({ title, gptClient }) => {
   const [prompt, setPrompt] = useState(samplePrompt)
   const [isLoading, setIsLoading] = useState(false)
 
@@ -23,7 +23,7 @@ const SingleChat = ({ gptClient }) => {
 
   return (
     <div className='section'>
-      <h3>Single Call</h3>
+      <h3>{title}</h3>
       <input
         id='singleCallInput'
         type='text'
