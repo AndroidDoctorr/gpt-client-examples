@@ -24,9 +24,16 @@ function App() {
         content={<Installation />}
         startCollapsed
       />
-
-      <SingleChat title='Single Chat' gptClient={client} />
-      <Conversation title='Continue Conversation' gptClient={client} />
+      <SingleChat
+        title='Single Chat'
+        gptClient={client}
+        placeholder={'Tell me a joke'}
+      />
+      <Conversation
+        title='Continue Conversation'
+        gptClient={client}
+        placeholder={"Who's there?"}
+      />
     </div>
   )
 }

@@ -1,10 +1,8 @@
 import { React, useState } from 'react'
 import { FaSpinner } from 'react-icons/fa'
 
-const samplePrompt = 'Tell me a joke'
-
-const SingleChat = ({ title, gptClient }) => {
-  const [prompt, setPrompt] = useState(samplePrompt)
+const SingleChat = ({ title, gptClient, placeholder }) => {
+  const [prompt, setPrompt] = useState(placeholder)
   const [isLoading, setIsLoading] = useState(false)
 
   const doSingleCall = () => {
@@ -27,7 +25,7 @@ const SingleChat = ({ title, gptClient }) => {
       <input
         id='singleCallInput'
         type='text'
-        placeholder={samplePrompt}
+        placeholder={placeholder}
         onKeyDown={(e) => handleKeyPress(e)}
         onChange={(e) => setPrompt(e.target.value)}
       />
