@@ -4,15 +4,18 @@ import { FaSpinner } from 'react-icons/fa'
 
 const startMessages = [new ChatMessage('Knock knock!', Role.assistant)]
 
-const Conversation = ({ title, gptClient, placeholder }) => {
+const Conversation = ({ title, gptClient, placeholder, messageLimit }) => {
   const [prompt, setPrompt] = useState('')
   const [messages, setMessages] = useState(startMessages)
   const [isLoading, setIsLoading] = useState(false)
 
+  let limit = messageLimit || 5
+
   const continueConversation = () => {
     setIsLoading(true)
     gptClient.singlePrompt(prompt).then((response) => {
-      document.getElementById('singleCallResponse').innerHTML = response
+      const responseMessage = new ChatMessage(response, Role.assistant)
+      messages.push(responseMessage)
       setIsLoading(false)
     })
   }
@@ -29,25 +32,24 @@ const Conversation = ({ title, gptClient, placeholder }) => {
       <p className='response' id='singleCallResponse'>
         {messages[0].content}
       </p>
-      <span>
-        <input
-          type='text'
-          placeholder={placeholder}
-          onKeyDown={(e) => handleKeyPress(e)}
-          onChange={(e) => setPrompt(e.target.value)}
-        />
-        <input
-          className={isLoading ? 'disabled' : ''}
-          type='button'
-          value={'GO'}
-          onClick={() => continueConversation()}
-          disabled={isLoading}
-        />
-        {isLoading && <FaSpinner className='spinner' />}
-      </span>
-      <hr></hr>
-      <h4>Response:</h4>
-      <p className='response' id='singleCallResponse'></p>
+      {messages.length <= limit && (
+        <>
+          <input
+            type='text'
+            placeholder={placeholder}
+            onKeyDown={(e) => handleKeyPress(e)}
+            onChange={(e) => setPrompt(e.target.value)}
+          />
+          <input
+            className={isLoading ? 'disabled' : ''}
+            type='button'
+            value={'GO'}
+            onClick={() => continueConversation()}
+            disabled={isLoading}
+          />
+          {isLoading && <FaSpinner className='spinner' />}
+        </>
+      )}
     </div>
   )
 }
