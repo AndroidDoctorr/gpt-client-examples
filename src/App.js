@@ -19,6 +19,25 @@ function App() {
         <h1>GPT Tools</h1>
         <h2>Examples</h2>
       </div>
+
+      <div className='section'>
+        <h3>Single Call</h3>
+        <input id='singleCallInput' type='text' placeholder={samplePrompt} />
+        <input type='submit' value={'GO'} />
+        <hr></hr>
+        <h4>Response:</h4>
+        <p className='response' id='singleCallResponse'></p>
+      </div>
+
+      <div className='section'>
+        <h3>Continue Conversation</h3>
+        <input id='singleCallInput' type='text' placeholder={samplePrompt} />
+        <input type='submit' value={'GO'} />
+        <hr></hr>
+        <h4>Response:</h4>
+        <p className='response' id='singleCallResponse'></p>
+      </div>
+
       <div className='section'>
         <h3>Getting Started</h3>
         <h4>Account Setup</h4>
@@ -59,22 +78,6 @@ function App() {
           <br />
           <code>{'const client = new GPTClient()'}</code>
         </div>
-      </div>
-      <div className='section'>
-        <h3>Single Call</h3>
-        <input id='singleCallInput' type='text' placeholder={samplePrompt} />
-        <input type='submit' value={'GO'} />
-        <hr></hr>
-        <h4>Response:</h4>
-        <p className='response' id='singleCallResponse'></p>
-      </div>
-      <div className='section'>
-        <h3>Single Call</h3>
-        <input id='singleCallInput' type='text' placeholder={samplePrompt} />
-        <input type='submit' value={'GO'} />
-        <hr></hr>
-        <h4>Response:</h4>
-        <p className='response' id='singleCallResponse'></p>
       </div>
     </div>
   )
