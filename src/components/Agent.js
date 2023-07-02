@@ -1,6 +1,7 @@
 import { React, useState } from 'react'
 import { ChatMessage, Role } from 'gpt-tools/dist/gpt-models'
 import RequestInput from './RequestInput'
+import AgentInput from './AgentInput'
 
 const Agent = ({
   title,
@@ -31,6 +32,7 @@ const Agent = ({
   return (
     <div className='section'>
       <h3>{title}</h3>
+      <AgentInput />
       {messages.map((m, i) => (
         <p
           key={'message' + i}
