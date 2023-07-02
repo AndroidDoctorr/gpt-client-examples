@@ -1,18 +1,14 @@
 import './styles/index.sass'
 import GPTClient from 'gpt-tools'
-import React, { useEffect } from 'react'
+import React from 'react'
 import Collapsible from './components/Collapsible'
 import Installation from './components/Installation'
+import SingleChat from './components/SingleChat'
 
 const client = new GPTClient()
-const samplePrompt = 'Tell me a joke'
 
 function App() {
-  useEffect(() => {
-    client.defaultTemperature = 0.5
-
-    doSampleCalls()
-  }, [])
+  client.defaultTemperature = 0.5
 
   return (
     <div className='App'>
@@ -28,18 +24,11 @@ function App() {
         startCollapsed
       />
 
-      <div className='section'>
-        <h3>Single Call</h3>
-        <input id='singleCallInput' type='text' placeholder={samplePrompt} />
-        <input type='submit' value={'GO'} />
-        <hr></hr>
-        <h4>Response:</h4>
-        <p className='response' id='singleCallResponse'></p>
-      </div>
+      <SingleChat gptClient={client} />
 
       <div className='section'>
         <h3>Continue Conversation</h3>
-        <input id='singleCallInput' type='text' placeholder={samplePrompt} />
+        <input id='singleCallInput' type='text' placeholder={'fffdfd'} />
         <input type='submit' value={'GO'} />
         <hr></hr>
         <h4>Response:</h4>
@@ -47,24 +36,6 @@ function App() {
       </div>
     </div>
   )
-}
-
-function doSampleCalls() {
-  doSingleCall()
-
-  // Create an agent
-
-  // Continue conversation with agent (3x)
-
-  // Build a dataset?
-
-  // Return an npm script call?
-}
-function doSingleCall() {
-  client.singlePrompt(samplePrompt).then((response) => {
-    document.getElementById('singleCallResponse').innerHTML = response
-    console.log(response)
-  })
 }
 
 export default App
