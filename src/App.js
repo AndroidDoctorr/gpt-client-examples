@@ -1,5 +1,6 @@
 import './styles/index.sass'
 import GPTClient from 'gpt-tools'
+import { ChatMessage, Role } from 'gpt-tools/dist/gpt-models'
 import React from 'react'
 import Collapsible from './components/Collapsible'
 import Installation from './components/Installation'
@@ -30,8 +31,9 @@ function App() {
         placeholder={'Tell me a joke'}
       />
       <Conversation
-        title='Continue Conversation'
+        title='Conversation'
         gptClient={client}
+        conversation={[new ChatMessage('Knock knock!', Role.assistant)]}
         placeholder={"Who's there?"}
       />
     </div>

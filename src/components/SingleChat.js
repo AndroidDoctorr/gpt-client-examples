@@ -1,5 +1,5 @@
 import { React, useState } from 'react'
-import { FaSpinner } from 'react-icons/fa'
+import RequestInput from './RequestInput'
 
 const SingleChat = ({ title, gptClient, placeholder }) => {
   const [prompt, setPrompt] = useState(placeholder)
@@ -13,30 +13,15 @@ const SingleChat = ({ title, gptClient, placeholder }) => {
     })
   }
 
-  const handleKeyPress = (event) => {
-    if (event.key === 'Enter') {
-      doSingleCall()
-    }
-  }
-
   return (
     <div className='section'>
       <h3>{title}</h3>
-      <input
-        id='singleCallInput'
-        type='text'
+      <RequestInput
         placeholder={placeholder}
-        onKeyDown={(e) => handleKeyPress(e)}
-        onChange={(e) => setPrompt(e.target.value)}
+        onSubmit={() => doSingleCall()}
+        onChange={(p) => setPrompt(p)}
+        isLoading={isLoading}
       />
-      <input
-        className={isLoading ? 'disabled' : ''}
-        type='button'
-        value={'GO'}
-        onClick={() => doSingleCall()}
-        disabled={isLoading}
-      />
-      {isLoading && <FaSpinner className='spinner' />}
       <hr></hr>
       <h4>Response:</h4>
       <p className='response' id='singleCallResponse'></p>

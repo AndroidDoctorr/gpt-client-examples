@@ -1,54 +1,51 @@
-import { ChatMessage, Role } from 'gpt-tools/dist/gpt-models'
 import { React, useState } from 'react'
-import { FaSpinner } from 'react-icons/fa'
+import { ChatMessage, Role } from 'gpt-tools/dist/gpt-models'
+import RequestInput from './RequestInput'
 
-const startMessages = [new ChatMessage('Knock knock!', Role.assistant)]
-
-const Conversation = ({ title, gptClient, placeholder, messageLimit }) => {
+const Conversation = ({
+  title,
+  gptClient,
+  placeholder,
+  messageLimit,
+  conversation,
+}) => {
   const [prompt, setPrompt] = useState('')
-  const [messages, setMessages] = useState(startMessages)
+  const [messages, setMessages] = useState([...conversation])
   const [isLoading, setIsLoading] = useState(false)
 
   let limit = messageLimit || 5
 
   const continueConversation = () => {
+    const requestMessage = new ChatMessage(prompt, Role.user)
+    messages.push(requestMessage)
     setIsLoading(true)
-    gptClient.singlePrompt(prompt).then((response) => {
+
+    gptClient.continueConversation(messages).then((response) => {
       const responseMessage = new ChatMessage(response, Role.assistant)
       messages.push(responseMessage)
       setIsLoading(false)
+      setPrompt('')
     })
-  }
-
-  const handleKeyPress = (event) => {
-    if (event.key === 'Enter') {
-      continueConversation()
-    }
   }
 
   return (
     <div className='section'>
       <h3>{title}</h3>
-      <p className='response' id='singleCallResponse'>
-        {messages[0].content}
-      </p>
+      {messages.map((m, i) => (
+        <p
+          key={'message' + i}
+          className={m.role == Role.assistant ? 'response' : 'request'}
+        >
+          {m.content}
+        </p>
+      ))}
       {messages.length <= limit && (
-        <>
-          <input
-            type='text'
-            placeholder={placeholder}
-            onKeyDown={(e) => handleKeyPress(e)}
-            onChange={(e) => setPrompt(e.target.value)}
-          />
-          <input
-            className={isLoading ? 'disabled' : ''}
-            type='button'
-            value={'GO'}
-            onClick={() => continueConversation()}
-            disabled={isLoading}
-          />
-          {isLoading && <FaSpinner className='spinner' />}
-        </>
+        <RequestInput
+          placeholder={placeholder}
+          onSubmit={() => continueConversation()}
+          onChange={(p) => setPrompt(p)}
+          isLoading={isLoading}
+        />
       )}
     </div>
   )
