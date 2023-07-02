@@ -25,8 +25,8 @@ const Collapsible = ({ title, content, startCollapsed }) => {
     <div className='collapsible'>
       <button className='toggle-button' onClick={handleToggle}>
         {isOpen ? <FaAngleDown /> : <FaAngleRight />}
+        <h3 className='title'>{title}</h3>
       </button>
-      <h3 className='title'>{title}</h3>
       <div
         className='content'
         ref={contentRef}
