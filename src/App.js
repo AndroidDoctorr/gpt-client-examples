@@ -17,7 +17,7 @@ function App() {
   return (
     <div className='App'>
       <div className='titleCard'>
-        <img src=''></img>
+        <img className='logo' src='./logo.png'></img>
         <h1>GPT Tools</h1>
         <h2>Examples</h2>
       </div>
