@@ -32,10 +32,7 @@ const Conversation = ({
     <div className='section'>
       <h3>{title}</h3>
       {messages.map((m, i) => (
-        <p
-          key={'message' + i}
-          className={m.role == Role.assistant ? 'response' : 'request'}
-        >
+        <p key={'message' + i} className={m.role}>
           {m.content}
         </p>
       ))}

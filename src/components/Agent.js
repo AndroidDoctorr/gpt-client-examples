@@ -34,10 +34,7 @@ const Agent = ({
       <h3>{title}</h3>
       <AgentInput />
       {messages.map((m, i) => (
-        <p
-          key={'message' + i}
-          className={m.role == Role.assistant ? 'response' : 'request'}
-        >
+        <p key={'message' + i} className={m.role}>
           {m.content}
         </p>
       ))}

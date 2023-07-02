@@ -24,7 +24,7 @@ const SingleChat = ({ title, gptClient, placeholder }) => {
       />
       <hr></hr>
       <h4>Response:</h4>
-      <p className='response' id='singleCallResponse'></p>
+      <p className='assistant' id='singleCallResponse'></p>
     </div>
   )
 }
