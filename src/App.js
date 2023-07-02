@@ -18,7 +18,7 @@ function App() {
     <div className='App'>
       <div className='titleCard'>
         <img className='logo' src='./logo.png'></img>
-        <h1>GPT Tools</h1>
+        <h1>GPT Client</h1>
         <h2>Examples</h2>
       </div>
 
