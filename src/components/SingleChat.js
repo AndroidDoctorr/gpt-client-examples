@@ -1,14 +1,15 @@
 import { React, useState } from 'react'
 import RequestInput from './RequestInput'
 
-const SingleChat = ({ title, gptClient, placeholder }) => {
+const SingleChat = ({ title, gptClient, placeholder, model, temperature }) => {
   const [prompt, setPrompt] = useState(placeholder)
+  const [response, setResponse] = useState('')
   const [isLoading, setIsLoading] = useState(false)
 
   const doSingleCall = () => {
     setIsLoading(true)
-    gptClient.singlePrompt(prompt).then((response) => {
-      document.getElementById('singleCallResponse').innerHTML = response
+    gptClient.singlePrompt(prompt, model, temperature).then((response) => {
+      setResponse(response)
       setIsLoading(false)
     })
   }
@@ -24,7 +25,7 @@ const SingleChat = ({ title, gptClient, placeholder }) => {
       />
       <hr></hr>
       <h4>Response:</h4>
-      <p className='assistant' id='singleCallResponse'></p>
+      <p className='assistant'>{response}</p>
     </div>
   )
 }

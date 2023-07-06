@@ -8,6 +8,8 @@ const Conversation = ({
   placeholder,
   messageLimit,
   conversation,
+  model,
+  temperature,
 }) => {
   const [prompt, setPrompt] = useState('')
   const [messages, setMessages] = useState([...conversation])
@@ -20,7 +22,7 @@ const Conversation = ({
     messages.push(requestMessage)
     setIsLoading(true)
 
-    gptClient.continueConversation(messages).then((response) => {
+    gptClient.continueConversation(messages, model, temperature,).then((response) => {
       const responseMessage = new ChatMessage(response, Role.assistant)
       messages.push(responseMessage)
       setIsLoading(false)
