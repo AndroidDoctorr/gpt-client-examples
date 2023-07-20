@@ -1,12 +1,10 @@
 import './styles/index.sass'
 import GPTClient from 'gpt-tools'
 import { ChatMessage, Role } from 'gpt-tools/dist/gpt-models'
+import { Agent, SinglePrompt, Conversation } from 'gpt-react'
 import React from 'react'
 import Collapsible from './components/Collapsible'
 import Installation from './components/Installation'
-import SingleChat from './components/SingleChat'
-import Conversation from './components/Conversation'
-import Agent from './components/Agent'
 
 const client = new GPTClient()
 
@@ -26,11 +24,12 @@ function App() {
         content={<Installation />}
         startCollapsed
       />
-      <SingleChat
+      <SinglePrompt
         title='Single Chat'
         gptClient={client}
         placeholder={'Tell me a joke'}
-      />
+        />
+      {/*
       <Conversation
         title='Conversation'
         gptClient={client}
@@ -55,6 +54,7 @@ function App() {
         ]}
         placeholder={"Non, lepores aucupor, vidistin'?"}
       />
+      */}
     </div>
   )
 }
